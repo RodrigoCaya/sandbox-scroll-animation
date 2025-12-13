@@ -1,12 +1,7 @@
 "use client"
 
-import { motion, useScroll, useTransform, type Variants } from "motion/react"
+import { motion, useScroll, useTransform } from "motion/react"
 import { useRef } from "react"
-
-const draw: Variants = {
-    hidden: { pathLength: 0, opacity: 0 },
-    visible: { pathLength: 1, opacity: 1 },
-}
 
 export const HelloWorld = () => {
     const ref = useRef<HTMLDivElement>(null)
