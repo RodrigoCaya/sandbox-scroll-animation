@@ -12,7 +12,7 @@ export const HelloWorld = () => {
     const ref = useRef<HTMLDivElement>(null)
     const { scrollYProgress } = useScroll({
         target: ref,
-        offset: ["start end", "end start"]
+        offset: ["start start", "end end"]
     })
 
     // Transform scroll progress to different ranges for staggered animation
@@ -27,7 +27,7 @@ export const HelloWorld = () => {
     const rect3Progress = useTransform(scrollYProgress, [0.8, 1.0], [0, 1])
 
     return (
-        <div ref={ref} style={{ height: "700vh" }}>
+        <div ref={ref} style={{ height: "1000vh" }}>
             <div style={{ 
                 position: "fixed", 
                 top: "50%", 
