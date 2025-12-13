@@ -1,41 +1,57 @@
 "use client"
 
-import { motion, type Variants } from "motion/react"
+import { motion, useScroll, useTransform, type Variants } from "motion/react"
+import { useRef } from "react"
 
 const draw: Variants = {
     hidden: { pathLength: 0, opacity: 0 },
-    visible: (i: number) => {
-        const delay = i * 0.5
-        return {
-            pathLength: 1,
-            opacity: 1,
-            transition: {
-                pathLength: { delay, type: "spring", duration: 1.5, bounce: 0 },
-                opacity: { delay, duration: 0.01 },
-            },
-        }
-    },
+    visible: { pathLength: 1, opacity: 1 },
 }
 
 export const HelloWorld = () => {
+    const ref = useRef<HTMLDivElement>(null)
+    const { scrollYProgress } = useScroll({
+        target: ref,
+        offset: ["start end", "end start"]
+    })
+
+    // Transform scroll progress to different ranges for staggered animation
+    const circleProgress = useTransform(scrollYProgress, [0, 0.2], [0, 1])
+    const xProgress = useTransform(scrollYProgress, [0.1, 0.3], [0, 1])
+    const rectProgress = useTransform(scrollYProgress, [0.2, 0.4], [0, 1])
+    const circle2Progress = useTransform(scrollYProgress, [0.3, 0.5], [0, 1])
+    const x2Progress = useTransform(scrollYProgress, [0.4, 0.6], [0, 1])
+    const rect2Progress = useTransform(scrollYProgress, [0.5, 0.7], [0, 1])
+    const circle3Progress = useTransform(scrollYProgress, [0.6, 0.8], [0, 1])
+    const x3Progress = useTransform(scrollYProgress, [0.7, 0.9], [0, 1])
+    const rect3Progress = useTransform(scrollYProgress, [0.8, 1.0], [0, 1])
+
     return (
-        <motion.svg
-            width="600"
-            height="600"
-            viewBox="0 0 600 600"
-            initial="hidden"
-            animate="visible"
-            style={image}
-        >
+        <div ref={ref} style={{ height: "700vh" }}>
+            <div style={{ 
+                position: "fixed", 
+                top: "50%", 
+                left: "50%", 
+                transform: "translate(-50%, -50%)",
+                zIndex: 1
+            }}>
+                <motion.svg
+                    width="600"
+                    height="600"
+                    viewBox="0 0 600 600"
+                    style={image}
+                >
             <motion.circle
                 className="circle-path"
                 cx="100"
                 cy="100"
                 r="80"
                 stroke="#ff0088"
-                variants={draw}
-                custom={1}
-                style={shape}
+                style={{
+                    ...shape,
+                    pathLength: circleProgress,
+                    opacity: circleProgress
+                }}
             />
             <motion.line
                 x1="220"
@@ -43,9 +59,11 @@ export const HelloWorld = () => {
                 x2="360"
                 y2="170"
                 stroke="#8df0cc"
-                variants={draw}
-                custom={2}
-                style={shape}
+                style={{
+                    ...shape,
+                    pathLength: xProgress,
+                    opacity: xProgress
+                }}
             />
             <motion.line
                 x1="220"
@@ -53,9 +71,11 @@ export const HelloWorld = () => {
                 x2="360"
                 y2="30"
                 stroke="#8df0cc"
-                variants={draw}
-                custom={2.5}
-                style={shape}
+                style={{
+                    ...shape,
+                    pathLength: xProgress,
+                    opacity: xProgress
+                }}
             />
             <motion.rect
                 width="140"
@@ -64,18 +84,22 @@ export const HelloWorld = () => {
                 y="30"
                 rx="20"
                 stroke="#0d63f8"
-                variants={draw}
-                custom={3}
-                style={shape}
+                style={{
+                    ...shape,
+                    pathLength: rectProgress,
+                    opacity: rectProgress
+                }}
             />
             <motion.circle
                 cx="100"
                 cy="300"
                 r="80"
                 stroke="#0d63f8"
-                variants={draw}
-                custom={2}
-                style={shape}
+                style={{
+                    ...shape,
+                    pathLength: circle2Progress,
+                    opacity: circle2Progress
+                }}
             />
             <motion.line
                 x1="220"
@@ -83,9 +107,11 @@ export const HelloWorld = () => {
                 x2="360"
                 y2="370"
                 stroke="#ff0088"
-                custom={3}
-                variants={draw}
-                style={shape}
+                style={{
+                    ...shape,
+                    pathLength: x2Progress,
+                    opacity: x2Progress
+                }}
             />
             <motion.line
                 x1="220"
@@ -93,9 +119,11 @@ export const HelloWorld = () => {
                 x2="360"
                 y2="230"
                 stroke="#ff0088"
-                custom={3.5}
-                variants={draw}
-                style={shape}
+                style={{
+                    ...shape,
+                    pathLength: x2Progress,
+                    opacity: x2Progress
+                }}
             />
             <motion.rect
                 width="140"
@@ -104,18 +132,22 @@ export const HelloWorld = () => {
                 y="230"
                 rx="20"
                 stroke="#8df0cc"
-                custom={4}
-                variants={draw}
-                style={shape}
+                style={{
+                    ...shape,
+                    pathLength: rect2Progress,
+                    opacity: rect2Progress
+                }}
             />
             <motion.circle
                 cx="100"
                 cy="500"
                 r="80"
                 stroke="#8df0cc"
-                variants={draw}
-                custom={3}
-                style={shape}
+                style={{
+                    ...shape,
+                    pathLength: circle3Progress,
+                    opacity: circle3Progress
+                }}
             />
             <motion.line
                 x1="220"
@@ -123,9 +155,11 @@ export const HelloWorld = () => {
                 x2="360"
                 y2="570"
                 stroke="#0d63f8"
-                variants={draw}
-                custom={4}
-                style={shape}
+                style={{
+                    ...shape,
+                    pathLength: x3Progress,
+                    opacity: x3Progress
+                }}
             />
             <motion.line
                 x1="220"
@@ -133,9 +167,11 @@ export const HelloWorld = () => {
                 x2="360"
                 y2="430"
                 stroke="#0d63f8"
-                variants={draw}
-                custom={4.5}
-                style={shape}
+                style={{
+                    ...shape,
+                    pathLength: x3Progress,
+                    opacity: x3Progress
+                }}
             />
             <motion.rect
                 width="140"
@@ -144,11 +180,15 @@ export const HelloWorld = () => {
                 y="430"
                 rx="20"
                 stroke="#ff0088"
-                variants={draw}
-                custom={5}
-                style={shape}
+                style={{
+                    ...shape,
+                    pathLength: rect3Progress,
+                    opacity: rect3Progress
+                }}
             />
         </motion.svg>
+            </div>
+        </div>
     )
 }
 
