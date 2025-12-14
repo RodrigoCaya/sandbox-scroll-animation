@@ -11,11 +11,37 @@ export const Mushroom = () => {
     })
 
     // Transform scroll progress to reveal from bottom to top
-    // Maps scroll progress (0-1) to reveal height (0-100)
-    const revealProgress = useTransform(scrollYProgress, [0, 1], [0, 100])
+    // Maps scroll progress (0-1) to reveal height (0-100)  
+    const revealProgress1 = useTransform(scrollYProgress, [0, 0.5], [0, 100])
+    const revealProgress2 = useTransform(scrollYProgress, [0.5, 1], [0, 100])
 
     return (
         <div ref={ref} style={{ height: "500vh" }}>
+            {/* Second mushroom - behind and to the left */}
+            <div style={{ 
+                position: "fixed", 
+                top: "43%", 
+                left: "31%", 
+                transform: "translate(-50%, -50%)",
+                zIndex: 0
+            }}>
+                <motion.div 
+                    style={{ 
+                        ...mushroomContainer,
+                        clipPath: useTransform(revealProgress2, (progress) => 
+                            `inset(${100 - progress}% 0 0 0)`
+                        )
+                    }}
+                >
+                    <img
+                        src="/2mushroom.svg"
+                        alt="Second Mushroom"
+                        style={mushroomImage}
+                    />
+                </motion.div>
+            </div>
+            
+            {/* First mushroom - front and center */}
             <div style={{ 
                 position: "fixed", 
                 top: "50%", 
@@ -26,7 +52,7 @@ export const Mushroom = () => {
                 <motion.div 
                     style={{ 
                         ...mushroomContainer,
-                        clipPath: useTransform(revealProgress, (progress) => 
+                        clipPath: useTransform(revealProgress1, (progress) => 
                             `inset(${100 - progress}% 0 0 0)`
                         )
                     }}
