@@ -19,9 +19,9 @@ export const Mushroom = () => {
         <div ref={ref} style={{ height: "500vh" }}>
             {/* Second mushroom - behind and to the left */}
             <div style={{ 
-                position: "fixed", 
-                top: "43%", 
-                left: "31%", 
+                position: "fixed",
+                top: "443px",
+                left: "417px",
                 transform: "translate(-50%, -50%)",
                 zIndex: 0
             }}>
@@ -44,8 +44,8 @@ export const Mushroom = () => {
             {/* First mushroom - front and center */}
             <div style={{ 
                 position: "fixed", 
-                top: "50%", 
-                left: "50%", 
+                top: "500px", 
+                left: "700px", 
                 transform: "translate(-50%, -50%)",
                 zIndex: 1
             }}>
