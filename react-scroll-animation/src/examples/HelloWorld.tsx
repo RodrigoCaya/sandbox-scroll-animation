@@ -11,14 +11,23 @@ export const HelloWorld = () => {
     })
 
     // Transform scroll progress to different ranges for staggered animation
+    // When scroll is 0-20% complete, animate from 0 to 1 (fully visible)
     const circleProgress = useTransform(scrollYProgress, [0, 0.2], [0, 1])
+    // When scroll is 10-30% complete, animate X lines from 0 to 1
     const xProgress = useTransform(scrollYProgress, [0.1, 0.3], [0, 1])
+    // When scroll is 20-40% complete, animate first rectangle from 0 to 1
     const rectProgress = useTransform(scrollYProgress, [0.2, 0.4], [0, 1])
+    // When scroll is 30-50% complete, animate second circle from 0 to 1
     const circle2Progress = useTransform(scrollYProgress, [0.3, 0.5], [0, 1])
+    // When scroll is 40-60% complete, animate second set of X lines from 0 to 1
     const x2Progress = useTransform(scrollYProgress, [0.4, 0.6], [0, 1])
+    // When scroll is 50-70% complete, animate second rectangle from 0 to 1
     const rect2Progress = useTransform(scrollYProgress, [0.5, 0.7], [0, 1])
+    // When scroll is 60-80% complete, animate third circle from 0 to 1
     const circle3Progress = useTransform(scrollYProgress, [0.6, 0.8], [0, 1])
+    // When scroll is 70-90% complete, animate third set of X lines from 0 to 1
     const x3Progress = useTransform(scrollYProgress, [0.7, 0.9], [0, 1])
+    // When scroll is 80-100% complete, animate third rectangle from 0 to 1
     const rect3Progress = useTransform(scrollYProgress, [0.8, 1.0], [0, 1])
 
     return (
